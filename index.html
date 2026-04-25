@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Password screen -->
+  <section id="gate" class="gate" aria-label="Enter password">
+    <div class="gate__split">
+      <figure class="gate__visual">
+        <div
+          class="gate__slides"
+          id="gate-slides"
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Photos"
+        >
+          <img
+            class="gate__slide gate__slide--active"
+            src="New folder\gate-photo-1.jpg"
+            alt="Nethma, portrait with a soft smile"
+            width="900"
+            height="1350"
+            decoding="async"
+            data-slide="0"
+            onerror="this.onerror=null;this.src='images/gate-photo.svg'"
+          />
+          <img
+            class="gate__slide"
+            src="New folder\gate-photo-2.jpg"
+            alt="Nethma in a red dress by blue curtains"
+            width="900"
+            height="1350"
+            decoding="async"
+            data-slide="1"
+            onerror="this.onerror=null;this.src='images/gate-photo.svg'"
+          />
+          <img
+            class="gate__slide"
+            src="New folder\gate-photo-3.jpg"
+            alt="Nethma next to a decorated Christmas tree"
+            width="900"
+            height="1350"
+            decoding="async"
+            data-slide="2"
+            onerror="this.onerror=null;this.src='images/gate-photo.svg'"
+          />
+          <img
+            class="gate__slide"
+            src="New folder\gate-photo-4.jpg"
+            alt="Traditional outfit and festive entrance"
+            width="900"
+            height="1350"
+            decoding="async"
+            data-slide="3"
+            onerror="this.onerror=null;this.src='images/gate-photo.svg'"
+          />
+          <img
+            class="gate__slide"
+            src="New folder\gate-photo-5.jpg"
+            alt="Nethma in a green and white sari outdoors"
+            width="900"
+            height="1350"
+            decoding="async"
+            data-slide="4"
+            onerror="this.onerror=null;this.src='images/gate-photo.svg'"
+          />
+        </div>
+        <div class="gate__carousel-bar">
+          <button type="button" class="gate__carousel-fab" id="gate-slide-prev" aria-label="Previous photo">
+            <span aria-hidden="true">‹</span>
+          </button>
+          <div class="gate__dots" id="gate-dots" role="tablist" aria-label="Choose photo"></div>
+          <button type="button" class="gate__carousel-fab" id="gate-slide-next" aria-label="Next photo">
+            <span aria-hidden="true">›</span>
+          </button>
+        </div>
+      </figure>
+      <div class="gate__content">
+        <div class="gate__card">
+          <p class="gate__label">You’ve been invited</p>
+          <h1 class="gate__title">A little surprise for you MY BABY💞🌎</h1>
+          <p class="gate__hint">Enter the secret word to continue</p>
+          <form id="gate-form" class="gate__form" autocomplete="off" novalidate>
+            <label class="sr-only" for="password-input">Password</label>
+            <input
+              id="password-input"
+              class="gate__input"
+              type="password"
+              name="password"
+              placeholder="Password"
+              maxlength="32"
+              required
+            />
+            <button type="submit" class="gate__btn">Enter</button>
+          </form>
+          <p id="gate-error" class="gate__error" role="alert" hidden>That’s not quite right. Try again.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+    
+
+      
+
+      
+
+     
+
+   
+
+  <script src="script.js"></script>
+</body>
+</html>

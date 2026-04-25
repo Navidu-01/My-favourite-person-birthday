@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Special Day</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="page-back page-back--link" href="index.html?back=1" aria-label="Back to password">← Back</a>
+
+  <section class="love-note" aria-label="Special message">
+    <div class="love-note__overlay"></div>
+    <div class="love-note__content">
+      <p class="love-note__text">
+        Today is your special day🥂🎂. Celebrate it well. I love you forever❤️. My lovely babe.😍
+      </p>
+      <button id="explore-more-btn" class="love-note__btn" type="button">Explore More</button>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      var btn = document.getElementById("explore-more-btn");
+      if (!btn) return;
+      btn.addEventListener("click", function () {
+        window.location.href = "memories.html";
+      });
+    })();
+  </script>
+</body>
+</html>
+

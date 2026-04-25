@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday to You - Memories</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Balloon Styles */
+    .balloon-container-mem {
+      position: fixed;
+      bottom: -150px;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 100;
+      overflow: hidden;
+    }
+
+    .balloon-mem {
+      position: absolute;
+      bottom: -100px;
+      width: 55px;
+      height: 75px;
+      border-radius: 50%;
+      cursor: pointer;
+      animation: floatUpMem 7s ease-in infinite;
+      transition: transform 0.2s, filter 0.2s;
+      pointer-events: auto;
+      z-index: 101;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+
+    .balloon-mem::before {
+      content: "▼";
+      position: absolute;
+      bottom: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+      color: inherit;
+      opacity: 0.6;
+    }
+
+    .balloon-mem::after {
+      content: "";
+      position: absolute;
+      bottom: -23px;
+      left: 50%;
+      width: 1px;
+      height: 28px;
+      background: rgba(0,0,0,0.2);
+    }
+
+    .balloon-mem:hover {
+      transform: scale(1.1);
+      filter: brightness(1.05);
+    }
+
+    @keyframes floatUpMem {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      70% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-120vh) rotate(20deg);
+        opacity: 0;
+      }
+    }
+
+    /* Floating Hearts */
+    .floating-heart-mem {
+      position: fixed;
+      font-size: 24px;
+      pointer-events: none;
+      z-index: 99;
+      animation: floatHeartMem 6s ease-out forwards;
+    }
+
+    @keyframes floatHeartMem {
+      0% {
+        transform: translateY(0) scale(1) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) scale(0.3) rotate(25deg);
+        opacity: 0;
+      }
+    }
+
+    /* Floating Emojis */
+    .floating-emoji-mem {
+      position: fixed;
+      font-size: 28px;
+      pointer-events: none;
+      z-index: 98;
+      animation: floatEmojiMem 8s ease-out forwards;
+    }
+
+    @keyframes floatEmojiMem {
+      0% {
+        transform: translateY(0) scale(1) rotate(0deg);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(-100vh) scale(0.3) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Sparkle Effect */
+    .sparkle-mem {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      background: radial-gradient(circle, gold, #FFD700, #FFA500);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 102;
+      animation: sparkleMem 0.8s ease-out forwards;
+      box-shadow: 0 0 10px gold;
+    }
+
+    @keyframes sparkleMem {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(0);
+        opacity: 0;
+      }
+    }
+
+    /* Pop Effect for Balloons */
+    .pop-effect-mem {
+      position: fixed;
+      font-size: 35px;
+      font-weight: bold;
+      pointer-events: none;
+      animation: popAnimMem 0.4s ease-out forwards;
+      z-index: 103;
+      text-shadow: 0 0 5px rgba(0,0,0,0.3);
+    }
+
+    @keyframes popAnimMem {
+      0% {
+        transform: scale(0.5);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1.8);
+        opacity: 0;
+      }
+    }
+
+    /* Music Toggle */
+    .music-toggle-mem {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 200;
+      background: rgba(255,255,255,0.35);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.6);
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      cursor: pointer;
+      font-size: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      color: #5c5470;
+    }
+
+    .music-toggle-mem:hover {
+      transform: scale(1.08);
+      background: rgba(255,255,255,0.55);
+    }
+
+    /* Twinkling Background Stars */
+    .twinkling-stars-mem {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .star-mem {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      opacity: 0;
+      animation: twinkleMem 3s ease-in-out infinite;
+    }
+
+    @keyframes twinkleMem {
+      0%, 100% { opacity: 0; transform: scale(1); }
+      50% { opacity: 0.9; transform: scale(1.3); }
+    }
+
+    /* Floating Birthday Banner */
+    .birthday-banner-mem {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, #FF69B4, #FFB6C1, #FFD700);
+      padding: 12px 24px;
+      border-radius: 50px;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      z-index: 106;
+      animation: bounceMem 2s ease-in-out infinite;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      cursor: pointer;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    @keyframes bounceMem {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Confetti Layer */
+    .confetti-layer-mem {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 97;
+    }
+
+    /* Enhanced Hero Section */
+    .hero {
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Photo Gallery Hover Effects */
+    section img {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    section img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 12px 40px rgba(70,50,100,0.2);
+    }
+
+    /* Floating Gift Box */
+    .gift-box {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 200;
+      cursor: pointer;
+      font-size: 45px;
+      filter: drop-shadow(0 4px 10px rgba(0,0,0,0.2));
+      transition: transform 0.3s;
+      animation: wiggle 2s ease-in-out infinite;
+    }
+
+    .gift-box:hover {
+      transform: scale(1.1);
+      animation: none;
+    }
+
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-5deg); }
+      75% { transform: rotate(5deg); }
+    }
+
+    /* Floating Message Notification */
+    .floating-message {
+      position: fixed;
+      background: linear-gradient(135deg, rgba(255,105,180,0.95), rgba(255,182,193,0.95));
+      backdrop-filter: blur(5px);
+      padding: 12px 20px;
+      border-radius: 30px;
+      color: white;
+      font-weight: bold;
+      z-index: 107;
+      animation: floatMessageMem 4s ease-out forwards;
+      pointer-events: none;
+      font-size: 14px;
+      white-space: nowrap;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      border: 1px solid rgba(255,255,255,0.5);
+    }
+
+    @keyframes floatMessageMem {
+      0% {
+        transform: translateX(0) translateY(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(-50px) translateY(-80px);
+        opacity: 0;
+      }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 40rem) {
+      .birthday-banner-mem {
+        font-size: 10px;
+        padding: 8px 12px;
+        top: 10px;
+        right: 10px;
+      }
+      .gift-box {
+        font-size: 35px;
+        bottom: 15px;
+        right: 15px;
+      }
+      .music-toggle-mem {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+        bottom: 15px;
+        left: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="celebration celebration--page">
+    <a class="page-back page-back--link" href="note.html" aria-label="Back to special message">← Back</a>
+    
+    <aside class="love-3d" aria-label="Love message">
+      <span class="love-3d__text" aria-hidden="true">I love you</span>
+    </aside>
+    
+    <!-- Twinkling Stars Background -->
+    <div class="twinkling-stars-mem" id="stars-container-mem"></div>
+    
+    <!-- Balloon Container -->
+    <div class="balloon-container-mem" id="balloon-container-mem"></div>
+    
+    <!-- Confetti Layer -->
+    <canvas id="confetti-canvas-mem" class="confetti-layer-mem"></canvas>
+    
+    <!-- Birthday Banner -->
+    <div class="birthday-banner-mem" id="birthday-banner-mem">
+      🎈 HAPPY BIRTHDAY MY LOVE! 🎈
+    </div>
+    
+    <!-- Music Toggle -->
+    <div class="music-toggle-mem" id="music-toggle-mem" title="Play Birthday Music">
+      🎵
+    </div>
+    
+    <!-- Gift Box -->
+    <div class="gift-box" id="gift-box" title="Open your gift!">
+      🎁
+    </div>
+   
+    <header class="hero">
+      <div class="hero__sparkle" aria-hidden="true"></div>
+      <p class="hero__eyebrow">Only for you</p>
+      <h1 class="hero__headline">🎈 Happy Birthday to You! 🎈</h1>
+      <p class="hero__sub">
+        Every smile with you is a memory I keep forever. This page is just for your special day.
+      </p>
+    </header>
+
+    <section aria-label="Birthday notes" style="display:flex;justify-content:center;padding:0 1.25rem 2rem;">
+        <div class="note-card__wish-text" style="max-width:48rem;width:100%;text-align:center;padding:clamp(1.2rem,4vw,2rem);">
+          <h2 class="note-card__title">🎂 My Birthday Wish for You 🎂</h2>
+          <p class="note-card__text">
+            Every moment spent with you is a beautiful chapter of my life💞, 
+            and I can't imagine my world without you in it. 
+            You light up my days with your smile😊 and fill my heart with endless love❤️. 
+            I am so grateful for you and will spend today and every day making sure you feel as special as you truly are💝✨. 
+            Here's to many more birthdays together, filled with love, laughter, and all of my heart.😘❤️
+          </p>
+        </div>
+    </section>
+
+    <section style="max-width:56rem;margin:0 auto 2rem;padding:0 1.25rem;display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;align-items:start;">
+      <img src="New folder/collage.png" alt="Heart photo collage" style="width:100%;height:400px;object-fit:cover;border-radius:1rem;box-shadow:0 8px 32px rgba(70,50,100,0.12);" onerror="this.src='https://placehold.co/600x400/FFB6C1/FFFFFF?text=Our+Memories+💕'"/>
+      <img src="New folder/heart-memories.jpg" alt="Heart shaped memories" style="width:100%;height:400px;object-fit:cover;border-radius:1rem;box-shadow:0 8px 32px rgba(70,50,100,0.12);" onerror="this.src='https://placehold.co/600x400/FFC0CB/FFFFFF?text=Love+You+❤️'"/>
+    </section>
+
+    <footer class="footer">
+      <p class="footer__text footer__text--love">🎈 Happy Birthday, my love. 🎈</p>
+    </footer>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
+  <script>
+    (function() {
+      // ========== BALLOONS ==========
+      const balloonContainer = document.getElementById('balloon-container-mem');
+      const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', '#DDA0DD', '#FFB6C1', '#87CEEB', '#FFD700', '#FF69B4', '#98D8C8', '#F7D794', '#E056B3', '#10AC84'];
+      
+      function createBalloon() {
+        const balloon = document.createElement('div');
+        balloon.className = 'balloon-mem';
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        balloon.style.backgroundColor = color;
+        balloon.style.left = Math.random() * 100 + '%';
+        balloon.style.animationDuration = 5 + Math.random() * 7 + 's';
+        balloon.style.animationDelay = Math.random() * 4 + 's';
+        balloon.style.width = 45 + Math.random() * 40 + 'px';
+        balloon.style.height = (45 + Math.random() * 40) * 1.35 + 'px';
+        
+        // Add emoji inside some balloons
+        const balloonType = Math.random();
+        if (balloonType > 0.65) {
+          const emojis = ['❤️', '💖', '💕', '🎈', '🎂', '✨', '💝', '😍', '🥰', '💗', '💓'];
+          balloon.style.display = 'flex';
+          balloon.style.alignItems = 'center';
+          balloon.style.justifyContent = 'center';
+          balloon.style.fontSize = '28px';
+          balloon.style.color = 'rgba(0,0,0,0.25)';
+          balloon.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+        }
+        
+        balloon.addEventListener('click', function(e) {
+          e.stopPropagation();
+          // Pop effect
+          const pop = document.createElement('div');
+          pop.className = 'pop-effect-mem';
+          pop.innerHTML = '💥 POP! 💥';
+          pop.style.left = e.clientX - 35 + 'px';
+          pop.style.top = e.clientY - 25 + 'px';
+          document.body.appendChild(pop);
+          setTimeout(() => pop.remove(), 400);
+          
+          // Remove balloon
+          balloon.remove();
+          
+          // Small confetti burst
+          canvasConfetti({
+            particleCount: 30,
+            spread: 40,
+            origin: { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight },
+            colors: ['#FF6B6B', '#FFD700', '#FF69B4', '#4ECDC4', '#FFB6C1']
+          });
+        });
+        
+        balloonContainer.appendChild(balloon);
+        
+        // Remove balloon after animation
+        const duration = parseFloat(balloon.style.animationDuration) * 1000;
+        setTimeout(() => {
+          if (balloon.parentNode) balloon.remove();
+        }, duration + 1000);
+      }
+      
+      function startBalloons() {
+        // Initial balloons
+        for (let i = 0; i < 12; i++) {
+          setTimeout(() => createBalloon(), i * 350);
+        }
+        // Continue creating balloons
+        setInterval(createBalloon, 1800);
+      }
+      
+      // ========== FLOATING HEARTS ==========
+      function createHeart() {
+        const heart = document.createElement('div');
+        heart.className = 'floating-heart-mem';
+        const hearts = ['❤️', '💖', '💕', '💗', '💓', '💝', '💘', '💞', '💟', '❣️', '🧡', '💛', '💚', '💙', '💜'];
+        heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.fontSize = 16 + Math.random() * 35 + 'px';
+        heart.style.animationDuration = 4 + Math.random() * 5 + 's';
+        heart.style.animationDelay = Math.random() * 2 + 's';
+        document.body.appendChild(heart);
+        
+        setTimeout(() => heart.remove(), 9000);
+      }
+      
+      setInterval(createHeart, 400);
+      
+      // ========== FLOATING EMOJIS ==========
+      function createFloatingEmoji() {
+        const emoji = document.createElement('div');
+        emoji.className = 'floating-emoji-mem';
+        const emojis = ['🎈', '🎂', '🎁', '🎉', '🎊', '🥳', '🎀', '🌸', '🌺', '⭐', '🌟', '✨', '💫', '🎪', '🏆', '💐'];
+        emoji.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+        emoji.style.left = Math.random() * 100 + '%';
+        emoji.style.fontSize = 18 + Math.random() * 32 + 'px';
+        emoji.style.animationDuration = 5 + Math.random() * 7 + 's';
+        emoji.style.animationDelay = Math.random() * 3 + 's';
+        document.body.appendChild(emoji);
+        
+        setTimeout(() => emoji.remove(), 12000);
+      }
+      
+      setInterval(createFloatingEmoji, 700);
+      
+      // ========== SPARKLES on click ==========
+      function createSparkle(x, y) {
+        for (let i = 0; i < 10; i++) {
+          setTimeout(() => {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle-mem';
+            sparkle.style.left = x + (Math.random() - 0.5) * 70 + 'px';
+            sparkle.style.top = y + (Math.random() - 0.5) * 70 + 'px';
+            document.body.appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), 800);
+          }, i * 35);
+        }
+      }
+      
+      document.addEventListener('click', function(e) {
+        createSparkle(e.clientX, e.clientY);
+      });
+      
+      // ========== TWINKLING STARS ==========
+      function createStars() {
+        const starsContainer = document.getElementById('stars-container-mem');
+        for (let i = 0; i < 150; i++) {
+          const star = document.createElement('div');
+          star.className = 'star-mem';
+          star.style.left = Math.random() * 100 + '%';
+          star.style.top = Math.random() * 100 + '%';
+          star.style.width = 1.5 + Math.random() * 4 + 'px';
+          star.style.height = star.style.width;
+          star.style.animationDelay = Math.random() * 5 + 's';
+          star.style.animationDuration = 1.5 + Math.random() * 3.5 + 's';
+          starsContainer.appendChild(star);
+        }
+      }
+      
+      // ========== CONFETTI FUNCTIONS ==========
+      function burstConfetti() {
+        // Main burst
+        canvasConfetti({
+          particleCount: 300,
+          spread: 110,
+          origin: { y: 0.6 },
+          startVelocity: 30,
+          colors: ['#FF6B6B', '#FFB6C1', '#FFD700', '#87CEEB', '#DDA0DD', '#FF69B4', '#4ECDC4', '#96CEB4']
+        });
+        
+        // Side bursts
+        setTimeout(() => {
+          canvasConfetti({
+            particleCount: 150,
+            spread: 80,
+            origin: { y: 0.5, x: 0.15 },
+            startVelocity: 22
+          });
+        }, 250);
+        
+        setTimeout(() => {
+          canvasConfetti({
+            particleCount: 150,
+            spread: 80,
+            origin: { y: 0.5, x: 0.85 },
+            startVelocity: 22
+          });
+        }, 250);
+        
+        setTimeout(() => {
+          canvasConfetti({
+            particleCount: 100,
+            spread: 60,
+            origin: { y: 0.3, x: 0.5 }
+          });
+        }, 800);
+      }
+      
+      function heavyConfetti() {
+        const duration = 4000;
+        const end = Date.now() + duration;
+        
+        const frame = () => {
+          canvasConfetti({
+            particleCount: 3,
+            angle: 55,
+            spread: 60,
+            origin: { x: 0, y: 0.6 },
+            colors: ['#FF6B6B', '#FFB6C1', '#FFD700', '#FF69B4']
+          });
+          canvasConfetti({
+            particleCount: 3,
+            angle: 125,
+            spread: 60,
+            origin: { x: 1, y: 0.6 },
+            colors: ['#87CEEB', '#DDA0DD', '#4ECDC4', '#96CEB4']
+          });
+          
+          if (Date.now() < end) {
+            requestAnimationFrame(frame);
+          }
+        };
+        
+        frame();
+      }
+      
+      function giftConfetti() {
+        // Heart-shaped confetti
+        canvasConfetti({
+          particleCount: 200,
+          spread: 100,
+          origin: { y: 0.7, x: 0.85 },
+          startVelocity: 35,
+          colors: ['#FF69B4', '#FF1493', '#FFB6C1', '#FFC0CB']
+        });
+        
+        setTimeout(() => {
+          canvasConfetti({
+            particleCount: 150,
+            spread: 80,
+            origin: { y: 0.6, x: 0.85 },
+            startVelocity: 28,
+            colors: ['#FFD700', '#FFA500', '#FF8C00']
+          });
+        }, 200);
+        
+        // Create floating message
+        const message = document.createElement('div');
+        message.className = 'floating-message';
+        message.innerHTML = '🎁 Surprise! You are amazing! 🎁';
+        message.style.bottom = '80px';
+        message.style.right = '80px';
+        document.body.appendChild(message);
+        setTimeout(() => message.remove(), 4000);
+      }
+      
+      // ========== MUSIC PLAYER ==========
+      const music = new Audio();
+      music.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3';
+      music.loop = true;
+      music.volume = 0.45;
+      
+      const musicToggle = document.getElementById('music-toggle-mem');
+      let isPlaying = false;
+      
+      function tryAutoPlay() {
+        music.play().then(() => {
+          isPlaying = true;
+          musicToggle.textContent = '🔊';
+        }).catch(() => {
+          isPlaying = false;
+          musicToggle.textContent = '🎵';
+        });
+      }
+      
+      musicToggle.addEventListener('click', function() {
+        if (isPlaying) {
+          music.pause();
+          isPlaying = false;
+          musicToggle.textContent = '🎵';
+        } else {
+          music.play().catch(() => {});
+          isPlaying = true;
+          musicToggle.textContent = '🔊';
+        }
+      });
+      
+      // ========== BANNER CLICK ==========
+      const banner = document.getElementById('birthday-banner-mem');
+      banner.addEventListener('click', function() {
+        heavyConfetti();
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          this.style.transform = '';
+        }, 200);
+        
+        // Show floating message
+        const msg = document.createElement('div');
+        msg.className = 'floating-message';
+        msg.innerHTML = '🎉 Happy Birthday Baby! 🎉';
+        msg.style.bottom = '100px';
+        msg.style.right = '100px';
+        document.body.appendChild(msg);
+        setTimeout(() => msg.remove(), 3500);
+      });
+      
+      // ========== GIFT BOX CLICK ==========
+      const giftBox = document.getElementById('gift-box');
+      giftBox.addEventListener('click', function() {
+        giftConfetti();
+        this.style.transform = 'scale(1.2)';
+        setTimeout(() => {
+          this.style.transform = '';
+        }, 300);
+        
+        // Change gift emoji temporarily
+        this.innerHTML = '🎉';
+        setTimeout(() => {
+          this.innerHTML = '🎁';
+        }, 1000);
+      });
+      
+      // ========== IMAGE CLICK EFFECTS ==========
+      const images = document.querySelectorAll('section img');
+      images.forEach(img => {
+        img.addEventListener('click', function() {
+          canvasConfetti({
+            particleCount: 60,
+            spread: 45,
+            origin: { y: 0.5, x: 0.5 },
+            colors: ['#FF69B4', '#FFB6C1', '#FFD700']
+          });
+          
+          // Temporary glow effect
+          this.style.filter = 'brightness(1.05) drop-shadow(0 0 10px rgba(255,105,180,0.5))';
+          setTimeout(() => {
+            this.style.filter = '';
+          }, 300);
+        });
+      });
+      
+      // ========== PERIODIC CONFETTI ==========
+      setInterval(function() {
+        if (Math.random() > 0.85) {
+          canvasConfetti({
+            particleCount: 35,
+            spread: 45,
+            origin: { y: 0.4, x: Math.random() },
+            colors: ['#FF69B4', '#FFD700', '#87CEEB', '#DDA0DD']
+          });
+        }
+      }, 7000);
+      
+      // ========== FLOATING MESSAGES ==========
+      const messages = [
+        "🎈 You're my everything! 🎈",
+        "💖 Love you more every day! 💖",
+        "🎂 Best Birthday Ever! 🎂",
+        "🥳 Party Time! 🥳",
+        "💕 Forever and always! 💕",
+        "🌟 You shine so bright! 🌟",
+        "🎁 You deserve the world! 🎁"
+      ];
+      
+      setInterval(() => {
+        const msg = document.createElement('div');
+        msg.innerHTML = messages[Math.floor(Math.random() * messages.length)];
+        msg.style.position = 'fixed';
+        msg.style.bottom = '120px';
+        msg.style.left = '20px';
+        msg.style.background = 'linear-gradient(135deg, rgba(255,105,180,0.95), rgba(255,182,193,0.95))';
+        msg.style.backdropFilter = 'blur(5px)';
+        msg.style.padding = '10px 20px';
+        msg.style.borderRadius = '30px';
+        msg.style.fontSize = '14px';
+        msg.style.fontWeight = 'bold';
+        msg.style.color = 'white';
+        msg.style.zIndex = '107';
+        msg.style.animation = 'floatMessageMem 4s ease-out forwards';
+        msg.style.pointerEvents = 'none';
+        msg.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)';
+        msg.style.border = '1px solid rgba(255,255,255,0.5)';
+        document.body.appendChild(msg);
+        setTimeout(() => msg.remove(), 4000);
+      }, 12000);
+      
+      // ========== INITIALIZE ALL ==========
+      createStars();
+      startBalloons();
+      
+      // Initial heart and emoji waves
+      for (let i = 0; i < 20; i++) {
+        setTimeout(() => createHeart(), i * 120);
+        setTimeout(() => createFloatingEmoji(), i * 180);
+      }
+      
+      // Initial confetti bursts
+      setTimeout(burstConfetti, 500);
+      setTimeout(heavyConfetti, 1500);
+      setTimeout(() => heavyConfetti(), 3000);
+      
+      // Try to autoplay music
+      setTimeout(tryAutoPlay, 1000);
+      
+      // Add floating "I Love You" periodically
+      setInterval(() => {
+        const loveMsg = document.createElement('div');
+        loveMsg.className = 'floating-heart-mem';
+        loveMsg.innerHTML = '💖 I LOVE YOU 💖';
+        loveMsg.style.left = Math.random() * 100 + '%';
+        loveMsg.style.fontSize = '18px';
+        loveMsg.style.fontWeight = 'bold';
+        loveMsg.style.whiteSpace = 'nowrap';
+        loveMsg.style.background = 'rgba(255,105,180,0.3)';
+        loveMsg.style.padding = '5px 12px';
+        loveMsg.style.borderRadius = '30px';
+        loveMsg.style.backdropFilter = 'blur(5px)';
+        loveMsg.style.animationDuration = '5s';
+        document.body.appendChild(loveMsg);
+        setTimeout(() => loveMsg.remove(), 5000);
+      }, 15000);
+      
+    })();
+  </script>
+</body>
+</html>
